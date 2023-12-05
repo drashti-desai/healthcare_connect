@@ -10,6 +10,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Receptionist,Patient
 from django.shortcuts import render, get_object_or_404
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import AuthenticationForm
+
 def admin_dashboard(request, receptionist_id):
     receptionist = get_object_or_404(Receptionist, id=receptionist_id)
 
@@ -92,6 +95,32 @@ def admin_logout(request):
     logout(request)
     # Redirect to an admin-specific logout success page or homepage
     return redirect('custom_login')  # Replace 'admin_home' 
+
+
+def login_user(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                # Redirect based on user type
+                if hasattr(user, 'receptionist'):
+                    receptionist_id = user.receptionist.user_ptr_id
+                    return redirect('receptionist_dashboard', receptionist_id=receptionist_id)
+                elif hasattr(user, 'patient'):
+                    patient_id = user.patient.user_ptr_id
+                    return redirect('patient_dashboard', patient_id=patient_id)
+                # Add more user types here if needed
+            else:
+                # Invalid login
+                return render(request, 'login.html', {'form': form, 'invalid_creds': True})
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
 
 
 

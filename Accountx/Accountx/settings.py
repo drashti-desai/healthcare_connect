@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'corsheaders.middleware.CorsMiddleware',
     'UserManagement',
 ]
 
@@ -70,6 +72,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Accountx.wsgi.application'
+
+# Configure CORS
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Database
