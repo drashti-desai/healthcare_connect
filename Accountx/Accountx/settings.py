@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders', 
     'UserManagement',
 ]
 
@@ -72,9 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Accountx.wsgi.application'
 
-# Configure CORS
-# CORS_ALLOW_ALL_ORIGINS = True
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -82,12 +78,9 @@ WSGI_APPLICATION = 'Accountx.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'HealthConnect',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'As?pw#192722',
-        'NAME': 'healthcare_connect',
+        'NAME': 'HealthConnect',
         'USER': 'postgres',
-        'PASSWORD': 'abc123',
+        'PASSWORD': 'As?pw#192722',
         'HOST': 'localhost',
         'PORT': '5432',
     }

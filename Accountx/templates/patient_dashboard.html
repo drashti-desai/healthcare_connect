@@ -42,6 +42,9 @@
             <h2 class="text-primary mb-4">patient Dashboard</h2>
             <div class="welcome-message">
                 <p>Welcome, {{ patient.username }}!</p>
+                <a href="{% url 'search_suggestions' %}">
+                    <button type="button">Search Hospitals and Specialists</button>
+                </a>
                 <!-- You can customize this message based on your needs -->
             </div>
             <p class="logout-link"><a href="{% url 'patient_logout' %}">Logout</a></p>

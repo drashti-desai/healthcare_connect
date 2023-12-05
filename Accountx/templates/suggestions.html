@@ -1,0 +1,32 @@
+<!-- suggestions.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Suggestions</title>
+    <!-- Add your head content here -->
+</head>
+<body>
+
+    <div class="container">
+        <h2>Search Suggestions</h2>
+
+        {% if suggestions %}
+            {% if suggestions|length > 0 %}
+                <h3>Results:</h3>
+                <ul>
+                    {% for suggestion in suggestions %}
+                        <li>{{ suggestion.name }} - {{ suggestion.location}}|{{suggestion.education}}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
+        {% else %}
+            <p>No suggestions available.</p>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

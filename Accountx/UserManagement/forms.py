@@ -1,4 +1,3 @@
-# healthcare/forms.py
 from django import forms
 from .models import Receptionist, Patient
 
@@ -12,7 +11,12 @@ class PatientRegistrationForm(forms.ModelForm):
         model = Patient
         fields = ['first_name','last_name','username', 'password', 'age', 'contact', 'dob', 'gender']
 
-    # Exclude last_login field
+    
     exclude = ['last_login']    
+
+
+class PreferencesForm(forms.Form):
+    choice = forms.ChoiceField(choices=[('hospital', 'Hospital'), ('specialist', 'Specialist')])
+    search_query = forms.CharField(max_length=255, required=True)    
 
 

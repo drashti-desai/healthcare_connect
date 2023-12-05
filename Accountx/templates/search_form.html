@@ -1,0 +1,26 @@
+<!-- search_form.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Form</title>
+</head>
+<body>
+
+    <h2>Search Preferences</h2>
+    
+    <form method="post" action="{% url 'search_suggestions' %}">
+        {% csrf_token %}
+        
+        <label for="id_choice">Choose:</label>
+        {{ form.choice }}
+        
+        <label for="id_search_query">Search Query:</label>
+        <input type="text" name="search_query" id="id_search_query" required>
+        
+        <button type="submit">Search</button>
+    </form>
+
+</body>
+</html>

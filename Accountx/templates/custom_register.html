@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <div class="login-container bg-light p-4 rounded shadow">
-            <h2 class="text-primary mb-4">{% if user_type == 'admin' %}Admin{% else %}Patient{% endif %} Registration</h2>
+            <h2 class="text-primary mb-4">{% if user_type == 'receptionist' %}Admin{% else %}Patient{% endif %} Registration</h2>
             <form action="{% url 'register_user' user_type=user_type %}" method="post">
                 {% csrf_token %}
                 {{ form.non_field_errors }}

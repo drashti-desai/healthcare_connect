@@ -1,13 +1,12 @@
-# composite.py
+
 from abc import ABC, abstractmethod
 
-# Component interface
+
 class PatientComponent(ABC):
     @abstractmethod
     def display_info(self):
         pass
 
-# Leaf class representing an individual patient
 class IndividualPatient(PatientComponent):
     def __init__(self, patient):
         self.patient = patient
@@ -23,7 +22,7 @@ class IndividualPatient(PatientComponent):
             }
         }
 
-# Composite class representing a group of patients
+
 class PatientGroup(PatientComponent):
     def __init__(self, patients):
         self.patients = patients
