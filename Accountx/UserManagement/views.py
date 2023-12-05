@@ -43,8 +43,9 @@ def patient_dashboard(request, patient_id):
 
    
     search_suggestions_url = reverse('search_suggestions')
+    book_appointment_url = reverse('book_appointment')
 
-    return render(request, 'patient_dashboard.html', {'patient': patient, 'search_suggestions_url': search_suggestions_url})
+    return render(request, 'patient_dashboard.html', {'patient': patient, 'search_suggestions_url': search_suggestions_url, 'book_appointment_url': book_appointment_url})
 
 
 def register_user(request, user_type):
