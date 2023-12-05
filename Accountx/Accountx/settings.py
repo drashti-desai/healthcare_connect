@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'Accountx.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'healthcare_connect',
+        'NAME': 'HealthConnect',
         'USER': 'postgres',
-        'PASSWORD': 'abc123',
+        'PASSWORD': 'As?pw#192722',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
@@ -122,7 +122,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-AUTH_USER_MODEL = 'UserManagement.CustomUser'
 LOGIN_URL = 'custom_login'
 
 # Default primary key field type

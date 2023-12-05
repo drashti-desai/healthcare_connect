@@ -1,39 +1,18 @@
+# healthcare/forms.py
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import CustomUser, admin,Patient
+from .models import Receptionist, Patient
 
-class adminRegistrationForm(UserCreationForm):
+class ReceptionistRegistrationForm(forms.ModelForm):
     class Meta:
-        model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name']
-    
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.user_type = 'examiner'
-        if commit:
-            user.save()
-            examiner = admin.objects.create(user=user)
-        return user
+        model = Receptionist
+        fields = ['first_name','last_name','username', 'password']
 
-class adminLoginForm(AuthenticationForm):
+class PatientRegistrationForm(forms.ModelForm):
     class Meta:
-        model = CustomUser
-        fields = ['username', 'password']
+        model = Patient
+        fields = ['first_name','last_name','username', 'password', 'age', 'contact', 'dob', 'gender']
 
-class patientRegistrationForm(UserCreationForm):
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name']
-    
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.user_type = 'examinee'
-        if commit:
-            user.save()
-            examinee = Patient.objects.create(user=user)
-        return user
+    # Exclude last_login field
+    exclude = ['last_login']    
 
-class patientLoginForm(AuthenticationForm):
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'password']
+

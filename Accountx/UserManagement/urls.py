@@ -1,15 +1,13 @@
+# healthcare/urls.py
 from django.urls import path
-from .views import index,custom_login,admin_Registration,admin_dashboard,patient_registration,patient_dashboard,patient_logout,admin_logout
+from .views import register_user, authenticate_user, admin_dashboard, patient_dashboard,patient_logout,admin_logout
 
 urlpatterns = [
-
-    path('', index, name='base'),
-    path('admin/register/', admin_Registration, name='admin_Register'),
-    path('login/', custom_login, name='custom_login'),
-    path('admin/dashboard/', admin_dashboard, name='examiner_dashboard'),
-
-    path('patient/register/', patient_registration, name='patient_register'),
-    path('patient/dashboard/', patient_dashboard, name='patient_dashboard'),
+    path('<str:user_type>/register/', register_user, name='register_user'),
+    path('login/', authenticate_user, name='custom_login'),
+    path('receptionist/dashboard/<int:receptionist_id>/', admin_dashboard, name='receptionist_dashboard'),
+    path('patient/dashboard/<int:patient_id>/', patient_dashboard, name='patient_dashboard'),
     path('patient/logout/', patient_logout, name='patient_logout'),
-    path('admin/logout/', admin_logout, name='admin_logout'),
+    path('receptionist/logout/', admin_logout, name='admin_logout'),
+    # Add more URLs for other views as needed
 ]
