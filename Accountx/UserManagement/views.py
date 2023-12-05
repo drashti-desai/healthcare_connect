@@ -7,8 +7,9 @@ from .composite import IndividualPatient, PatientGroup
 from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .models import Receptionist,Patient
+from .models import Receptionist,Patient,Hospital,Specialist,Appointment
 from django.shortcuts import render, get_object_or_404
+from django.utils.dateparse import parse_datetime
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
@@ -121,6 +122,49 @@ def login_user(request):
         form = AuthenticationForm()
 
     return render(request, 'login.html', {'form': form})
+
+
+def book_appointment(request):
+    if request.method == 'POST':
+        # Extracting data from the form
+        first_name = request.POST.get('firstName')
+        birth_date = request.POST.get('birthDate')
+        appointment_date = request.POST.get('appointmentDate')
+        appointment_time = request.POST.get('appointmentTime')
+        preferred_physician = request.POST.get('preferredPhysician')
+        visit_reason = request.POST.get('visitReason')
+
+        # Date and time parsing and combining
+        date = parse_datetime(appointment_date + " " + appointment_time)
+
+        # Example: Fetch user, hospital, and specialist based on form data.
+        # Adjust the logic based on how you want to find these entities.
+        user = Receptionist.objects.filter(first_name=first_name, date_of_birth=birth_date).first()
+        hospital = Hospital.objects.first()  # Placeholder: Replace with actual logic
+        specialist = Specialist.objects.filter(name=preferred_physician).first()
+
+        if not all([user, hospital, specialist, date]):
+            # Handle the case where any of the required entities are not found or date is invalid
+            return HttpResponse("Invalid data provided", status=400)
+
+        # Create and save the appointment
+        appointment = Appointment(
+            user=user,
+            hospital=hospital,
+            specialist=specialist,
+            date=date,
+            status='Scheduled',
+            visit_reason=visit_reason
+        )
+        appointment.save()
+        return HttpResponse("Appointment created successfully")
+
+    else:
+        # For a GET request, render the empty form
+        hospitals = Hospital.objects.all()  # If you have a list of hospitals to choose from
+        specialists = Specialist.objects.all()  # If you have a list of specialists to choose from
+        return render(request, 'book_appointment.html', {'hospitals': hospitals, 'specialists': specialists})
+
 
 
 
