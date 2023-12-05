@@ -78,9 +78,12 @@ WSGI_APPLICATION = 'Accountx.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'HealthConnect',
+        # 'NAME': 'HealthConnect',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'As?pw#192722',
+        'NAME': 'healthcare_connect',
         'USER': 'postgres',
-        'PASSWORD': 'As?pw#192722',
+        'PASSWORD': 'abc123',
         'HOST': 'localhost',
         'PORT': '5432',
     }
